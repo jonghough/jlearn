@@ -20,6 +20,6 @@ pd 'type marker'
 pd R1;R2
 pd 'show'
 ```
-![kpca] (/dr/kpca_iris.png)
+![kpca](/dr/kpca_iris.png)
 
 ## Factor Analysis
