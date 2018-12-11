@@ -230,7 +230,13 @@ NB. 5: max number of epochs
 NB. 6: regularization param
 NB. 7: solver, e.g. SGD, Adam etc.
 NB. 8: batch size (minimum 1, max is dataset size)
-
+NB.
+NB. Example:
+NB. Run MLP Classifier on iris dataset. (X,Y) are the training datapoints and labels, respectively.
+NB. > C=. ((4 8 8 5 3);'tanh';'softmax'; 0.1; 0.2; 100;'L2'; 'SGD';5) conew 'MLPClassifier'
+NB. > Y fit__C X
+NB. ...
+NB. > predict__C testDatapoint
 create=: 3 : 0
 'layers hidden activation alpha'=: 4{.y
 'beta epochs reg solverType batchSize'=: 4}. y
@@ -440,6 +446,10 @@ NB. 5: max epochs
 NB. 6: regularization param
 NB. 7: solver, e.g. SGD, Adam etc.
 NB. 8: batch size (minimum 1, max is dataset size)
+NB.
+NB. Example:
+NB. > REG=. ((6 5 5 2 1);'tanh';0.1; 0.2; 10000;'L2'; 'SGD';10) conew 'MLPRegressor'
+NB. 
 create=: 3 : 0
 if. a: -: y do.
   ''
@@ -470,11 +480,4 @@ end.
 codestroy ''
 )
 
-
-
-0 : 0
-C=. ((4 8 8 5 3);'tanh';'softmax'; 0.1; 0.2; 100;'L2'; 'SGD';5) conew 'MLPClassifier'
-
-REG=. ((6 5 5 2 1);'tanh';0.1; 0.2; 10000;'L2'; 'SGD';10) conew 'MLPRegressor'
-targets fit__REG input
-)
+ 
