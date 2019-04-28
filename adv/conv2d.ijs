@@ -152,7 +152,7 @@ try.
   n=: r
 NB. first forward pass. We need to build bias tensor.
   if. bias -: '' do.
-    bias=: 2 %~ +: 0.5-~ ? ( 2 {. $ n) $ 0
+    bias=: <:+: ? (1 2 { $ n) $ 0
     solver=: (<filter) setSolver tolower solverType
     e__solver=: alpha
   end.
