@@ -201,11 +201,11 @@ r=: ks cf"_ 3 y
 n=: r
 NB. first forward pass. We need to build bias tensor.
 if. bias -: '' do.
-  bias=: <:+: ? ( 1 2 { $ n) $ 0
+  bias=: <:+: ? (  1{ $ n) $ 0
   solver=: (<filter) setSolver tolower solverType
   e__solver=: alpha
 end.
-r=: r +"3 3  bias
+r=: r +"3 _  bias
 r
 )
 
@@ -260,7 +260,7 @@ dW=: |:"3|:"4 (+/ % #) (exdeltas) deconv"3 2 i
 dW=: (clampLow, clampHigh) clampV"1 0 dW
 NB.dBias=. ((1&,@:$)$ ,) (+/ % #) ntd
 filter=: >(<filter) calcGrad__solver <dW
-bias=: bias - alpha * (+/ % #) ntd
+bias=: bias - alpha * (+/ % #)+/"1+/"2 ntd
 NB. finally return delta
 dOut
 )

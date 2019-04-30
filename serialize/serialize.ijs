@@ -62,7 +62,6 @@ for_i. i.#l do.
   name=. >i{l
   isnamet=. (":".name,'__y') -: TYPE
   if.isnamet +. isPrimitive ".(5!:5<(name,'__y')) do.
-smoutput name
     s=. s,name,'=:', (": ". ',hfd a.i. (3!:1)"_ ',name,'__y'),LF
   else.
     t=. nc <":(,name),'__y'
@@ -87,7 +86,6 @@ s
 )
 
 isPrimitive=: 3 : 0
-smoutput 'is primiitvie' 
 if.  0 NB.(<'boxed') ~: < datatype y
 do.
 1

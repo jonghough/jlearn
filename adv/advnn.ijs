@@ -171,6 +171,16 @@ elseif. x-: 'softmax' do.
 end.
 )
 
+createRandomWeightsUniform=: 4 : 0
+'Activation function unknown.' assert (<x) e. 'logistic';'tanh';'relu';'identity';'softmax'
+
+dimen=. 2 ((>:@:[),]) /\ y 
+
+max=. (%:@:(6&%)@:(+/))&.> <"1 dimen 
+
+max ([ * (<:@:+:@:?@:($&0)@:]))&.><"1 dimen
+
+)
 
 NB. Sets the activation function and its derivative.
 NB. Activation functions may be any of
