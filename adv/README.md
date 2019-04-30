@@ -200,7 +200,7 @@ is quite limited. It is better to try a more difficult dataset.
 Dataset can be found here: http://www.cs.utoronto.ca/~kriz/cifar.html
 
 The dataset contains  60000 32x32 colour images in 10 classes, with 6000 images per class.
-#### Example loaidng an image
+#### Example loading an image
 
 ```j
 data=: a.i. toJ dltb , rf < '/path/to/cifar/cifar-10-batches-bin/data_batch_1.bin'
@@ -210,6 +210,7 @@ img1=: +/ 65536 256 1 * img1
 'rgb' viewmat img1
 ```
 the image shown should, if read correctly show a frog (`{.{.data` gives 6, i.e. label for frogs is 6).
+
 ![cifar-frog](/adv/cifar-10-frog.png)
 
 
