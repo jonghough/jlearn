@@ -182,6 +182,39 @@ max ([ * (<:@:+:@:?@:($&0)@:]))&.><"1 dimen
 
 )
 
+fans=: 3 : 0
+if. 2 = # y do. y
+else. (1{y), */ (1 -.~ i. # y) { y end.
+)
+
+uniform=: 4 : 0
+x * <: +: ? y $ 0
+)
+
+
+
+normal=: 4 : 0
+(# */y) bmt_jLearnUtil_ 0;x
+)
+
+
+
+glorotUniform=: 3 : 0
+(%: 6 % +/ fans y) uniform ( y)
+)
+
+
+
+heUniform=: 3 : 0
+(%: 6 % {. fans y) uniform ( y)
+)
+
+
+
+glorotNormal=: 3 : 0
+(%: 2 % +/ fans y) normal ( y)
+)
+
 NB. Sets the activation function and its derivative.
 NB. Activation functions may be any of
 NB. softmax
@@ -617,7 +650,8 @@ if. a: -: y do.
   ''
 else.
   'in out activation solverType learnRate'=: y
-  w=: ,/>activation createRandomWeightsNormal in, out
+ NB. w=: 1.2 * ,/>activation createRandomWeightsNormal in, out
+   w =:  glorotUniform (>:in),out
   solver=: (<w) setSolver tolower solverType
   e__solver=: learnRate
   next=: ''

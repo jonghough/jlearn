@@ -11,8 +11,12 @@ coclass 'Dropout'
 coinsert 'NNLayer'
 
 create=: 3 : 0
+if. a: -: y do. 
+  ''
+else.
 prob=: y
 'Invalid probability set.' assert (prob >: 0) *. prob<:1
+end.
 type=: 'Dropout'
 )
 

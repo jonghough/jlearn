@@ -129,7 +129,8 @@ else.
   assert. 1 <: stride
   assert. alpha > 0
   ks=: 2 3 $ (3 # stride) ,}.shape     NB. kernel shape 
-  filter=: activation createRandomWeightsNormal shape 
+  filter=: glorotUniform shape 
+NB.filter=: activation createRandomWeightsNormal shape 
   reordered=: 1 0 2 3 |: filter
   setActivationFunctions activation
   solver=: (<filter) setSolver tolower solverType
