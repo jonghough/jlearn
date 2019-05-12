@@ -184,7 +184,8 @@ max ([ * (<:@:+:@:?@:($&0)@:]))&.><"1 dimen
 
 fans=: 3 : 0
 if. 2 = # y do. y
-else. (1{y), */ (1 -.~ i. # y) { y end.
+NB. else. (1{y), */ (1 -.~ i. # y) { y end.
+else. (*/ 1}.y), {.y end.
 )
 
 uniform=: 4 : 0
@@ -651,7 +652,7 @@ if. a: -: y do.
 else.
   'in out activation solverType learnRate'=: y
  NB. w=: 1.2 * ,/>activation createRandomWeightsNormal in, out
-   w =:  glorotUniform (>:in),out
+   w =:  heUniform (>:in),out
   solver=: (<w) setSolver tolower solverType
   e__solver=: learnRate
   next=: ''
