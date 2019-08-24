@@ -171,6 +171,50 @@ elseif. x-: 'softmax' do.
 end.
 )
 
+createRandomWeightsUniform=: 4 : 0
+'Activation function unknown.' assert (<x) e. 'logistic';'tanh';'relu';'identity';'softmax'
+
+dimen=. 2 ((>:@:[),]) /\ y 
+
+max=. (%:@:(6&%)@:(+/))&.> <"1 dimen 
+
+max ([ * (<:@:+:@:?@:($&0)@:]))&.><"1 dimen
+
+)
+
+fans=: 3 : 0
+if. 2 = # y do. y
+NB. else. (1{y), */ (1 -.~ i. # y) { y end.
+else. (*/ 1}.y), {.y end.
+)
+
+uniform=: 4 : 0
+x * <: +: ? y $ 0
+)
+
+
+
+normal=: 4 : 0
+(# */y) bmt_jLearnUtil_ 0;x
+)
+
+
+
+glorotUniform=: 3 : 0
+(%: 6 % +/ fans y) uniform ( y)
+)
+
+
+
+heUniform=: 3 : 0
+(%: 6 % {. fans y) uniform ( y)
+)
+
+
+
+glorotNormal=: 3 : 0
+(%: 2 % +/ fans y) normal ( y)
+)
 
 NB. Sets the activation function and its derivative.
 NB. Activation functions may be any of
@@ -607,7 +651,8 @@ if. a: -: y do.
   ''
 else.
   'in out activation solverType learnRate'=: y
-  w=: ,/>activation createRandomWeightsNormal in, out
+ NB. w=: 1.2 * ,/>activation createRandomWeightsNormal in, out
+   w =:  heUniform (>:in),out
   solver=: (<w) setSolver tolower solverType
   e__solver=: learnRate
   next=: ''

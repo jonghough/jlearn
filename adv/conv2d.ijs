@@ -43,23 +43,50 @@ rot90=: |.@:|:"2
 conv=: ;.3
 convFunc=: +/@:,@:*
 
-
+NB. Creates random weights of the desired shape using a normal distribution with mean
+NB. 0 and the variance depending on the type of activation function. This is beased on
+NB. Xavier initialization of weight params.
+NB. Parameters:
+NB. y: Shape fo weights.
+NB. x: Activation function - one of:
+NB.    'logistic'
+NB.    'tanh'
+NB.    'relu'
+NB.    'identity'
+NB.    'softmax'
+NB. returns:
+NB.    random weights of shape y
 createRandomWeightsNormal=: 4 : 0
 'Activation function unknown.' assert (<x) e. 'logistic';'tanh';'relu';'identity';'softmax'
+
 if. x -: 'logistic' do.
-  ($ (*/@:] bmt_jLearnUtil_ (0&,@:%:@:(2&%@:(+/))))) y
+  ($ (*/@:] bmt_jLearnUtil_ (0&,@:%:@:(2&%@:(+/@:(2&{.)))))) y
 elseif. x -: 'tanh' do.
-  ($ (*/@:] bmt_jLearnUtil_ (0&,@:(4&*)@:%:@:(2&%@:(+/))))) y
+  ($ (*/@:] bmt_jLearnUtil_ (0&,@:(4&*)@:%:@:(2&%@:(+/@:(2&{.)))))) y
 elseif. x-: 'relu' do.
-  ($ (*/@:] bmt_jLearnUtil_ (0&,@:(1.41421&*)@:%:@:(2&%@:(+/))))) y
+  ($ (*/@:] bmt_jLearnUtil_ (0&,@:(1.41421&*)@:%:@:(2&%@:(+/@:(2&{.)))))) y
 elseif. x-: 'identity' do.
-  ($ (*/@:] bmt_jLearnUtil_ (0&,@:%:@:(2&%@:(+/))))) y
+  ($ (*/@:] bmt_jLearnUtil_ (0&,@:%:@:(2&%@:(+/@:(2&{.)))))) y
 elseif. x-: 'softmax' do.
-  ($ (*/@:] bmt_jLearnUtil_ (0&,@:%:@:(2&%@:(+/))))) y
+  ($ (*/@:] bmt_jLearnUtil_ (0&,@:%:@:(2&%@:(+/@:(2&{.)))))) y
 end.
 )
 
+createRandomWeightsUniform=: 4 : 0
+'Activation function unknown.' assert (<x) e. 'logistic';'tanh';'relu';'identity';'softmax'
 
+if. x -: 'logistic' do.
+   (%:  6 % +/ 2{.  y) * <:+:? y $ 0
+elseif. x -: 'tanh' do.
+   4 * (%:  6 % +/ 2{.  y) * <:+:? y $ 0
+elseif. x-: 'relu' do.
+   1.41421 * (%:  6 % +/ 2{.  y) * <:+:? y $ 0
+elseif. x-: 'identity' do.
+   (%:  6 % +/ 2{.  y) * <:+:? y $ 0
+elseif. x-: 'softmax' do.
+   (%:  6 % +/ 2{.  y) * <:+:? y $ 0
+end.
+)
 
 NB. Creates an instance of 'Conv2D'. The instacne can be added to
 NB. a 'NNPipeline' instances layers, and is used to convolve 2-d data
@@ -102,7 +129,8 @@ else.
   assert. 1 <: stride
   assert. alpha > 0
   ks=: 2 3 $ (3 # stride) ,}.shape     NB. kernel shape 
-  filter=: activation createRandomWeightsNormal shape 
+  filter=: heUniform shape 
+NB.filter=: activation createRandomWeightsNormal shape 
   reordered=: 1 0 2 3 |: filter
   setActivationFunctions activation
   solver=: (<filter) setSolver tolower solverType
@@ -125,7 +153,7 @@ try.
   n=: r
 NB. first forward pass. We need to build bias tensor.
   if. bias -: '' do.
-    bias=: 2 %~ +: 0.5-~ ? ( }. $ n) $ 0
+    bias=: <:+: ? (1 2 { $ n) $ 0
     solver=: (<filter) setSolver tolower solverType
     e__solver=: alpha
   end.
@@ -174,11 +202,11 @@ r=: ks cf"_ 3 y
 n=: r
 NB. first forward pass. We need to build bias tensor.
 if. bias -: '' do.
-  bias=: 2 %~ +: 0.5-~ ? ( }. $ n) $ 0
+  bias=: <:+: ? (  1{ $ n) $ 0
   solver=: (<filter) setSolver tolower solverType
   e__solver=: alpha
 end.
-r=: r +"3 _ bias
+r=: r +"3 _  bias
 r
 )
 
@@ -233,7 +261,7 @@ dW=: |:"3|:"4 (+/ % #) (exdeltas) deconv"3 2 i
 dW=: (clampLow, clampHigh) clampV"1 0 dW
 NB.dBias=. ((1&,@:$)$ ,) (+/ % #) ntd
 filter=: >(<filter) calcGrad__solver <dW
-bias=: bias - alpha * (+/ % #) ntd
+bias=: bias - alpha * (+/ % #)+/"1+/"2 ntd
 NB. finally return delta
 dOut
 )

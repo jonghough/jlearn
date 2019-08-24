@@ -11,6 +11,7 @@ network layer
 * FlattenLayer - used to flatten outputs from previous layers into 2-D shapes. Strictly not a nn
 layer
 
+***
 
 ## Pipeline
 
@@ -64,12 +65,14 @@ We can then run predictions on test data using
 ```
 predict__pipe testData
 ```
+***
 
 ## Convolutional Network
 
 Convolution layers have been implemented for 2D convolutions, and only for FULL 
 convolutions.
 
+***
 ### Example
 Example to build a 2d convolution network. 
 This example will create a very simple network to differentiate horizontal lines form vertical lines.
@@ -132,7 +135,7 @@ NB. seems like it at least separated the training sets correctly, which is all w
 NB. example.
 ```
 
-
+*** 
 ### Example
 
 Example shows a convolutional net implemented to solve the MNIST problem.
@@ -197,7 +200,7 @@ is quite limited. It is better to try a more difficult dataset.
 Dataset can be found here: http://www.cs.utoronto.ca/~kriz/cifar.html
 
 The dataset contains  60000 32x32 colour images in 10 classes, with 6000 images per class.
-#### Example loaidng an image
+#### Example loading an image
 
 ```j
 data=: a.i. toJ dltb , rf < '/path/to/cifar/cifar-10-batches-bin/data_batch_1.bin'
@@ -207,6 +210,7 @@ img1=: +/ 65536 256 1 * img1
 'rgb' viewmat img1
 ```
 the image shown should, if read correctly show a frog (`{.{.data` gives 6, i.e. label for frogs is 6).
+
 ![cifar-frog](/adv/cifar-10-frog.png)
 
 
@@ -233,13 +237,14 @@ TRAINLABELS fit__pipe TRAININPUT
 
 ```
 
-
+***
 ## Recurrent Networks
 
 ### LSTMs
 
 Long Short Term Memory networks
 
+***
 ### Example
 ```j
 rotjText=: 'Luke Skywalker has returned to his home planet of Tatooine in an attempt to rescue his friend Han Solo from the clutches of the vile gangster Jabba the Hutt. Little does Luke know that the GALACTIC EMPIRE has secretly begun construction on a new armored space station even more powerful than the first dreaded Death Star. When completed, this ultimate weapon will spell certain doom for the small band of rebels struggling to restore freedom to the galaxy....'
@@ -272,7 +277,7 @@ Y fit__pipe X
 
 ```
 
-
+***
 ### Example
 
 This example uses LSTM to  learn the next values in a numerical sequence.
@@ -321,6 +326,7 @@ NB. quick check
  397
 ```
 
+***
 ### Example
 Perhaps the above was overly complex. We can make a simple LSTM network.
 
