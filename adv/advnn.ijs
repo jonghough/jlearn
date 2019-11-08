@@ -207,7 +207,7 @@ glorotUniform=: 3 : 0
 
 
 heUniform=: 3 : 0
-(%: 6 % {. fans y) uniform ( y)
+1.0 * (%: 6 % {. fans y) uniform ( y)
 )
 
 
@@ -652,7 +652,7 @@ if. a: -: y do.
 else.
   'in out activation solverType learnRate'=: y
  NB. w=: 1.2 * ,/>activation createRandomWeightsNormal in, out
-   w =:  heUniform (>:in),out
+   w =:  glorotUniform (>:in),out
   solver=: (<w) setSolver tolower solverType
   e__solver=: learnRate
   next=: ''
