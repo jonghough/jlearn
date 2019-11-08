@@ -57,9 +57,9 @@ The best solution has the optimal discovered sum of 48, and the weight sum is re
 
 ## Symbolic Regression
 
-*Symbolic Regression* is the art of guessing a combination of
-functions which, when run in a specific order will give a desired
-outcome.
+*Symbolic Regression* is s tool used to searcha limit space of mathematical
+expressions to find a model approximating the solution to some problem. 
+
 e.g.
 
 I have some  input values:
