@@ -5,7 +5,7 @@
 
 ## Kernel Principle Component Analysis
 
-```
+```j
 k=: (X;'d';1;1;2) conew 'KPCASolver'
 pd 'reset'
 pd 'type dot'
@@ -28,7 +28,7 @@ Factor analysis is another algorithm for reducing the dimensionality of a datase
 
 ### Example using the *iris dataset*
 
-```
+```j
 data =: 4 readCSV_jLearnUtil_ '~Projects/jlearn/datasets/iris.csv'
 'X Y Z W'=: splitDataset_jLearnUtil_ data,(1.0;1)
 NB. create factor analysis solver

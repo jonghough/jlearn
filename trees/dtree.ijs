@@ -225,7 +225,7 @@ bisectReg=: 3 : 0
 mg=. feature;score
 data=. (dataIndices&{)&.> y
 if. depth (>+.=) maxTreeDepth__treeHolder do.
-  smoutput 'reached max depth'
+  NB. smoutput 'reached max depth'
   f=: (~.@:<"1) ,: (<"0@:#/.~)
   class=: (+/ % #) >{: data
   currentLeafNodeCount__treeHolder=: >:currentLeafNodeCount__treeHolder

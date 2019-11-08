@@ -122,8 +122,10 @@ NB.
 NB. Example:
 NB.
 vectorColumnReplace=: 4 : 0"1 2
-if. 2>#$x do. x=. ,: x end.
-vecs=. vectorize"1&.|: x{"1 y
+NB.if. 2>#$x do. x=. ,: x end.
+smoutput #$x
+smoutput x
+vecs=: vectorize"1&.|: x{"1 y
 vecs x}"1 y
 )
 
@@ -231,6 +233,27 @@ indices=. s part i.#input
 'trt vat tet'=. indices {&.> <target
 
 tri;trt;vai;vat;tei;tet
+)
+
+findNonNumericColumns=: 3 : 0
+numer=. (".@:":)&.>
+nn=. ''
+for_i. i.{:$ y do.
+  try.
+    numer"0 i{"1 y
+  catch.
+    smoutput 'error at  ',": i
+    nn=. nn,i
+  catchd.
+    smoutput 'errord at  ',": i
+    nn=. nn,i
+  catcht.
+    smoutput 'errort at  ',": i
+    nn=. nn,i
+    
+  end.
+end.
+nn
 )
 
 NB. TODO
