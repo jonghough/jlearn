@@ -3,7 +3,21 @@ Copyright (C) 2017 Jonathan Hough. All rights reserved.
 )
 
 
-NB. Utility verbs
+NB. ================ Utility verbs ====================
+NB. This collection of verbs is mainly concerned with
+NB. the manipulation of data.
+NB. 
+NB. Example: Want to load a dataset.
+NB.
+NB. Let's load the iris dataset, from the datasets directory.
+NB. > 'X Y' =: readCSV_jLearnUtil_ jpath '~Projects/jlearn/datasets/iris.csv'
+NB. Here, X is the input data (feature set), and Y is the result data, which, in 
+NB. this case, is the one-hot encoded classes of irises.
+NB. 
+NB. We want to split the data into training, validation, test sets:
+NB. > 'Xtr Ytr Xv Yv Xte Yte' =:splitDatasetWithValidation_jLearnUtil_ X;Y;1.2;0.1;1
+NB. Here (Xtr, Ytr) are the training X,Y data, (Xv,Yv) are validation, and
+NB. (Xte, Yte) are test data.
 require 'csv'
 
 cocurrent 'jLearnUtil'
@@ -48,7 +62,11 @@ NB.   returns: (X,Y) boxed pair.
 NB. example:
 NB. >  Data=: 4 readCSV 'path/to/iris.csv'
 readCSV=: 4 : 0
-d=. readcsv y
+d=. readcsv y 
+if. d -: _1 do.
+smoutput 'Dataset not found. Check file path.' 
+throw. 
+end.
 Xs=. makenum (x -.~ i. {: $ d) {"1 d
 Ys=. >vectorize x {"1 d
 Xs;Ys
@@ -152,7 +170,9 @@ r=. {:$y
 (x{."1 y) ,"1 (-r-x+1){."1 y
 )
 
-
+NB. Shuffle data. e.g. it may be useful to
+NB. shuffle a dataset to randomize the order
+NB. of datapoints.
 shuffle=: {~ ?~@#
 
 NB. splits the data set (inputs; targets)
@@ -208,8 +228,8 @@ NB. >  NB. train input, train target, valid. input, valid. target, test input, t
 NB.
 NB. >  'ti tt vi vt tei tet' = splitDatasetWithValidation_jLearnUtil_ X;Y;0.4;0.2;1
 splitDatasetWithValidation=: 3 : 0
-'input target trainpc validpc norminputs'=. y
-'sum of percentages must not exceed 1.' assert 1<trainpc + validpc
+'input target trainpc validpc norminputs'=. y 
+'sum of percentages must not exceed 1.' assert 1>:trainpc + validpc
 'length of input and target data must be equal.' assert (# input)-: # target
 
 shufflePerm=. (?~@#) input
