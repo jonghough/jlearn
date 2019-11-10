@@ -53,6 +53,31 @@ plot |: ((>@:{.) (+ ,[, -) (>@:{:) )"1 predict__gp"1 test
 
 ![gpr](/gp/gpr.png)
 
+## Example 2
+
+Same as above, but simpler function to estimate.
+Define twenty points.
+```j
+X=: 20 1 $ 10%~ i: 10
+```
+And target values for each point. Use a very simpel function (cos (x)).
+
+```j
+Y=:2 o. 5 * X
+```
+
+```j
+gp=: (X;Y;1;'expSquared';'lbfgs';1e2;1e_3) conew 'GPBase'
+fit__gp _2 _1 _10
+```
+We can then test visually, with a plot on values. (load plot package first).
+
+```j
+plot , >{."1 predict__gp"0[ 500%~ i: 500
+```
+You should see the function estimate gives a nice sinusoidal wave, matching the
+cosine function very well. Clearly, this example is very simple, but gives a good
+verification that the method works in - at the very least - simple scenarios.
 
 ### Example using Linear Kernel
 Using the previous example's data, we can use a linear kernel to predict the 
