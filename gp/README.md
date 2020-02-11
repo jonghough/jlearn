@@ -99,8 +99,9 @@ any analysis is of limited use, but it may be interesting anyway.
 We will use the datset to create a Gaussian Process prediction model, to predict future deaths. 
 *See datasets/2019_ncoiv_1.csv* file.  
 
+```j
 csv =: readcsv 'path/to/2019_ncov_1.csv'
-dateKey=:~.}.1{"1 csv 
+```
 
 To standardize both the input and output, we use the `MinMaxScalar` class.
 
