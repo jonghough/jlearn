@@ -87,3 +87,43 @@ gp=: (A;t;0;'linear';'cg';1e3;1e_2) conew 'GPBase'
 fit__gp 0 _0.55 0
 plot |: ((>@:{.) (+ ,[, -) (>@:{:) )"1 predict__gp"1 test
 ```
+
+## Example using the 2020 Coronavirus dataset.
+
+The dataset is (at the time of writing) very small, having fewer than 20 days worth of data. We will
+predict the death rate for the **coronavirus** outbreak, using the dataset. As the data is very limited,
+and our usage of available data is rather rudimentary, and naive (we are not looking at recoveries or the spread of the 
+coronavirus, only deaths for each day),
+any analysis is of limited use, but it may be interesting anyway. 
+
+We will use the datset to create a Gaussian Process prediction model, to predict future deaths. 
+*See datasets/2019_ncoiv_1.csv* file.  
+
+csv =: readcsv 'path/to/2019_ncov_1.csv'
+dateKey=:~.}.1{"1 csv 
+
+To standardize both the input and output, we use the `MinMaxScalar` class.
+
+```j
+X=: |: ,: makenum 0{"1 csv NB. days since discovery
+Y=: |: ,: makenum 1{"1 csv NB. deaths on that day.
+
+mms =: (X;0;18)conew 'MinMaxScaler'
+X2=: standardizeColumns__mms ''
+
+mms2 =: (Y;0;910)conew 'MinMaxScaler'
+Y2=: standardizeColumns__mms2 ''
+
+gp=: (X2;Y2;1;'expSquared';'lbfgs';1e3;1e_3) conew 'GPBase'
+fit__gp _3 2 _100 NB. found params : 0.119 0.267 _100
+```
+We can see the predicted trend by predicting death counts up to 50 days from the discovery of the coronavirus.
+The  first 20 predicted values follow the actual values,a dn from there th predicted deaths tails off before falling rapidly.
+The graph is vaguely similar to an *epidemic wave* curve, and with no other data, we can't hope for anything better.
+
+```j
+NB. see the predicted trend, and errors.
+plot |:destandardize__mms2"0  ({. ([,+,-) {:)&:>"1 predict__gp"1 standardizeData__mms i. 50
+```
+
+![2019ncov](/gp/2019-ncov-1.png)

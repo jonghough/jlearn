@@ -120,7 +120,7 @@ NB. Parameters:
 NB. y: number of clusters. (known or estimated)
 NB. x: number of iterations of kmeans.
 kmCluster=: 4 : 0
-k =. (( (,/vertmap));'Euclidean';y; 'uniform') conew 'KMeans'
+k =. (( (,/vertmap));'euclidean';y; 'uniform') conew 'KMeans'
 fit__k x
 labels=: labels__k
 clusterLabels=: (2^y) %~ #. labels__k

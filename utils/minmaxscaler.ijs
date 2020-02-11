@@ -50,6 +50,14 @@ colStd=: stddev data
 res=: data -"1 1 colMeans
 res %"1 1 colStd
 )
+
+NB. standardize a single datapoint according to the
+NB. current dataset's mean andstd deviation.
+NB. y: dataset to standardize
+standardizeData=: 3 : 0"1
+r=. y -"1 1 colMeans
+r %"1 1 colStd
+)
 NB. Destandardizes the input. Assumes the input is
 NB. standardized data with each feature having
 NB. mean, variance = 0,1
