@@ -21,8 +21,7 @@ implementation found in reference [2].
 
 
 
-load 'math/lapack'
-load 'math/lapack/potrf'
+require jpath '~Projects/jlearn/utils/lapackutils.ijs' 
 require jpath '~Projects/jlearn/clustering/kmeans.ijs'
 
 
@@ -38,7 +37,7 @@ Example usage
 coclass 'GMM'
 
 
-cholesky=: potrf_jlapack_
+cholesky=: cholesky_jUtilsLapack_
 PI=: o. 1
 LOG2PI=: ^.+:PI
 det=: -/ . *            NB. determinant

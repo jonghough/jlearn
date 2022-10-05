@@ -12,6 +12,7 @@ Kaiming He et al.
 link: https://arxiv.org/pdf/1502.01852v1.pdf
 )
 
+load 'math/calculus'
 require jpath '~Projects/jlearn/mlp/mlpopt.ijs'
 
 NB. This script contains the "NNPipeline", "NNLayer",
@@ -83,10 +84,10 @@ relu=: 0:`[@.>&0
 drelu=: 0:`1:@.>&0
 
 logistic=: %@:>:@:^@:-
-dlogistic=: (logistic f.) d. 1
+dlogistic=: (logistic f.) deriv_jcalculus_ 1
 
 tanh=: 7&o.
-dtanh=: (tanh f.) d. 1
+dtanh=: (tanh f.) deriv_jcalculus_ 1
 
 identity=: ]
 didentity=: 1:"0

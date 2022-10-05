@@ -2,9 +2,7 @@ Note 0
 Copyright (C) 2017 Jonathan Hough. All rights reserved.
 )
 
-load 'math/lapack'
-load 'math/lapack/geev'
-load 'math/lapack/gesvd'
+require jpath '~Projects/jlearn/utils/lapackutils.ijs'
 
 coclass 'PCASolver'
 mean=: +/ % #
@@ -62,9 +60,9 @@ means=. mean data
 dataMean=: means
 centered=: data -"1 1 means
 S=: (#y)%~(|:centered) dot centered NB. covariance
-e=. gesvd_jlapack_ S
-evals=. >1{e
-evecs=. >0{e
+e=. svd_jUtilsLapack_ S 
+evals=. 1{::e
+evecs=. 0{::e
 if. restriction = 0 do.
   reduced=: evecs {"_ 1~ I. evals > limit 
 else.
@@ -86,10 +84,9 @@ dataMean=: means
 centered=: make2d u"1  data -"1 1 means 
 S=: (#y)%~(centered) dot |:centered NB. covariance
 
-e=. gesvd_jlapack_ S
-smoutput e
-evals=. >1{e
-evecs=. >0{e
+e=. svd_jUtilsLapack_ S 
+evals=. 1{::e
+evecs=. 0{::e
 if. restriction = 0 do.
   reduced=: evecs {"_ 1~ I. evals > limit 
 else.

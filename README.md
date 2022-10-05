@@ -30,6 +30,7 @@ WIP Machine learning library, written in J. Various algorithm implementations, i
 | K-means / K-medians            | n/a            | n/a        | o                | n/a                           |        |                                                                   |
 | Hierarchical Clustering        | n/a            | n/a        | o                | n/a                           |        | Agglomerative clustering                                          |
 | K-nearest Neighbours           | n/a            | n/a        | o                | n/a                           |        |                                                                   |
+| DBSCAN                         | n/a            | n/a        | o                | n/a                           |        |                                                                   |
 | Kd-tree                        | o              | x          | o                | n/a                           |        |                                                                   |
 | Self-Organizing Maps           | n/a            | n/a        | n/a              | o                             |        |                                                                   |
 | Hopfield Networks              | n/a            | x          | n/a              | o                             |        |                                                                   |
