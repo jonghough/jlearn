@@ -44,3 +44,14 @@ NB. TODO
 ```
 
 ### Example 2
+
+Example using the pendigits dataset
+
+```j
+myClassifier=: ((16 20 12 10);'tanh';'softmax';0.1;0.2;50;'L2';'sgdm';100) conew 'MLPClassifier'
+Y fit__myClassifier X
+```
+
+```j
++/ Y-:"1 1 (=>./)"1 predict__myClassifier"1 X
+```

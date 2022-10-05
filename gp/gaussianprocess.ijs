@@ -17,8 +17,7 @@ link: https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/gaussian_
 [5] Machine Learning, An Algorithmic Perspective 2nd Ed., Stephen Marsland
 )
 
-load 'math/lapack'
-load 'math/lapack/potrf'
+require jpath '~Projects/jlearn/utils/lapackutils.ijs' 
 load '~Projects/jlearn/optimize/conjugategradient.ijs'
 
 
@@ -48,8 +47,7 @@ variance=: (+/@(*:@(] - +/ % #)) % #)"1
 
 
 
-
-cholesky=: potrf_jlapack_
+ 
 
 kernelConstant=: 3 : 0
 'd1 d2 theta'=. y
@@ -123,12 +121,12 @@ K=. K + alpha*I
 
 if. hasNoise do.
   err=. (^sigN) * I
-  try. L=. cholesky K + err
+  try. L=. cholesky_jUtilsLapack_ K + err
   catch.
     smoutput 'Cholesky decomposition failed '
   end.
 else.
-  L=. cholesky K
+  L=. cholesky_jUtilsLapack_ K
 end.
 ks=. kf trainX;testX;theta
 kss=. kf testX;testX;theta
@@ -192,13 +190,13 @@ I=. (=@i.) #K
 K=. K+ alpha*I
 if. hasNoise do.
   err=. (^sigN) * I
-  try. L=. cholesky K + err
+  try. L=. cholesky_jUtilsLapack_ K + err
   catch.
     smoutput 'Cholesky decomposition failed'
     throw.
   end.
 else.
-  L=. cholesky K
+  L=. cholesky_jUtilsLapack_ K
 end.
 
 invk=. ''
@@ -232,7 +230,7 @@ else.
   K=. sum
 end.
 
-try. L=. cholesky K
+try. L=. cholesky_jUtilsLapack_ K
 catch.
   smoutput sigF ,sigL, sigN
   smoutput K
@@ -285,7 +283,7 @@ else.
   K=. sum
 end.
 
-try. L=. cholesky K
+try. L=. cholesky_jUtilsLapack_ K
 catch.
   smoutput 'Cholesky decomposition failed '
   throw.
@@ -335,7 +333,7 @@ else.
   K=. sum
 end.
 
-try. L=. cholesky K
+try. L=. cholesky_jUtilsLapack_ K
 catch.
   smoutput 'Cholesky decomposition failed '
   throw.
@@ -422,7 +420,7 @@ while. it < 100 do.
   pi=. sig f
   W=. pi * 1 - pi
   Ws=. |: %: W
-  L=. cholesky Id + Ws *"_ 1"1 _ K *"1 _"_ 1 Ws
+  L=. cholesky_jUtilsLapack_ Id + Ws *"_ 1"1 _ K *"1 _"_ 1 Ws
   
   b=. |:( W *f) + (trainY-pi)
   invK=. (%.|: L) dot (%. L)
