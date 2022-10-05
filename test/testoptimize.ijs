@@ -1,3 +1,5 @@
+
+load 'math/calculus'
 require jpath '~Projects/jlearn/optimize/linesearch.ijs'
 require jpath '~Projects/jlearn/optimize/conjugategradient.ijs'
 require jpath '~Projects/jlearn/optimize/neldermead.ijs'
@@ -20,7 +22,7 @@ minima=: minBFGS_jLearnOpt_ (f f.`'');(fp f.`'');(4);1e4;1e_4;_0.1
 
 test2=: 3 : 0 NB. f = (x+1)^2
 f=: *:@:>:
-fp=: (f f.) d. 1
+fp=: (f f.) deriv_jcalculus_ 1
 minima=: minBFGS_jLearnOpt_ (f f.`'');(fp f.`'');(4);1e4;1e_5;0.1 
 (1e_3&>@:>:) assertTrue minima
 )
@@ -50,7 +52,7 @@ minima=: minLBFGS_jLearnOpt_ (f f.`'');(fp f.`'');(3.5);1e4;1e_4
 
 test6=: 3 : 0 NB. f = (x+1)^2
 f=: *:@:>:
-fp=: (f f.) d. 1
+fp=: (f f.) deriv_jcalculus_ 1
 minima=: minLBFGS_jLearnOpt_ (f f.`'');(fp f.`'');(4);1e4;1e_4
 (1e_3&>@:>:) assertTrue minima
 )
@@ -84,7 +86,7 @@ minima=: minCG_jLearnOpt_ (f f.`'');(fp f.`'');(4);1e4;1e_5;'fr'
 
 test10=: 3 : 0 NB. f = (x+1)^2
 f=: *:@:>:
-fp=: (f f.) d. 1
+fp=: (f f.) deriv_jcalculus_ 1
 minima=: minCG_jLearnOpt_ (f f.`'');(fp f.`'');(4);1e4;1e_5;'fr' 
 (1e_3&>@:>:) assertTrue minima
 )

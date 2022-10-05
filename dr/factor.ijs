@@ -12,8 +12,7 @@ https://seat.massey.ac.nz/personal/s.r.marsland/Code/Ch6/factoranalysis.py
 link: https://www.csie.ntu.edu.tw/~mhyang/course/u0030/papers/Mixture%20of%20Factor%20Analyzers.pdf
 )
 
-load 'math/lapack'
-load 'math/lapack/gesvd'
+ 
 
 NB. Factor Analysis. Reduces the dataset dimensionality to a
 NB. smaller matrix which has linearly independent features
@@ -32,10 +31,7 @@ create=: 3 : 0
 reducedDims=: y
 )
 
-NB. Decompose matrix using SVD.
-decomp=: 3 : 0
-gesvd_jlapack_ y
-)
+ 
 
 fit=: 3 : 0
 X=: y

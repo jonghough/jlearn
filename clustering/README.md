@@ -54,4 +54,41 @@ We can see how many datapoints are in each cluster.
 ```j
 #/.~ {.Ks__hc
 50 96 4
+
+
+# DBSCAN
+
+DBSCAN is a method for clustering with an unknown number of clusters. i.e. the number of clusters and the data points to be placed
+in each cluster are decided by the *DBSCAN* algorithm.
+
+## Example 1, random data
+```j
+X=: ? 100 2 $ 0
+db=: (X;'Euclidean';0.3;5) conew 'DBSCAN'
+fit__db ''
+K=:(< X) ({~&.>) L__db  I.&.>@:<@:="_ 0 ~. L__db
+plotClusters__db K
+```
+Note that `L__db` gives the cluster allocation per data point.
+
+### Showing results
+In the above example we can plot the results on a 2D cluster diagram.
+First let's create a verb to plot the points
+```j
+load 'plot'
+plotClusters=: 3 : 0
+pd 'reset'
+pd 'type marker'
+for_i. i. # y do.
+pd <"1|: > i{y
+end.
+pd 'show'
+)
+```
+Then let's plot each data point with its corresponding cluster label.
+```j
+clusters=:(< X) ({~&.>) L__db  I.&.>@:<@:="_ 0 ~. L__db
+plotClusters clusters
+```
+
 ```

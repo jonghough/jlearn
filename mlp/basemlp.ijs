@@ -2,6 +2,7 @@ Note 0
 Copyright (C) 2017 Jonathan Hough. All rights reserved.
 )
 
+load 'math/calculus'
 require jpath '~Projects/jlearn/mlp/mlpopt.ijs'
 require jpath '~Projects/jlearn/utils/utils.ijs'
 
@@ -57,10 +58,10 @@ relu=: 0:`[@.>&0
 drelu=: 0:`1:@.>&0
 
 logistic=: %@:>:@:^@:-
-dlogistic=: (logistic f.) d. 1
+dlogistic=: (logistic f.) deriv_jcalculus_ 1
 
 tanh=: 7&o.
-dtanh=: (tanh f.) d. 1
+dtanh=: (tanh f.) deriv_jcalculus_ 1
 
 identity=: ]
 didentity=: 1:"0

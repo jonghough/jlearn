@@ -52,18 +52,18 @@ NB. given training set. The traiing set will be
 NB. used to predict test data.
 create=: 3 :0
 dimensions=: {:$,>{.y
-
-P=: combinations ,/~ dimensions
+ 
 S=: dimensions $ 1
 
-edges=: (inverseIdentity dimensions) * (dimensions,dimensions)$ ((+/&:>) % #) (*/"1@:(P&{"_ 1)@:,)&.> y
+NB. edges=: (inverseIdentity dimensions) * (dimensions,dimensions)$ ((+/&:>) % #) (*/"1@:(P&{"_ 1)@:,)&.> y
+edges =: (inverseIdentity dimensions) * (dimensions,dimensions)$ ,((+/&:>) % #) (*"0 _/~@:,)&.> y
 )
 
 predict=: 3 : 0
 shape=. $ y
 d=. make2d ,y
 dc=. d
-maxIteration=. 10000
+maxIteration=. 100
 c=. 0
 while. c < maxIteration do.
   c=. c+1
