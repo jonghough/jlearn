@@ -12,8 +12,9 @@ ltri_jlapack2_ |: l
 )
 
 
+NB. for symmetric matrices only.
 svd=: 3 : 0
-
+'matrix must be symmetric' assert y-:|:y
 'm n'=. $ y
 mn=. m<.n
 sui=. m,m
@@ -24,9 +25,14 @@ U=. sui$0
 VT=. svt$0
 lwork=. 1 >. 0 { (((3*mn)+(m>.n))>.(5*mn)) , ((2*mn)+(m>.n))
 work=. lwork$zero
+NB. 7: absolute value of eigenvalues
+NB. 8: eigenvector matrix
+8 7{dgesvd_jlapack2_ (,'A');(,'A');(,m);(,n);(|:y);(,1>.m);S;U;(,1>.m);VT;(,1>.n);(lwork$0);(,lwork);,_1
+)
 
-r=.dgesvd_jlapack2_ (,'A');(,'A');(,m);(,n);(|:y);(,1>.m);S;U;(,1>.m);VT;(,1>.n);(lwork$0);(,lwork);,_1
-NB. item 7 is the list of eigenvalues
-NB. item 8 is the eigenvectors respctive to 7. 
-8 7 { r
+
+dgeev=: 3 : 0
+
+'m n'=. $ y
+r=. dgeev_jlapack2_ (,'V');(,'V');(,n);(|:y);(,1>.m);(wr=. n$0);(wi=. n$0);(vl=. (n,n)$0);(,1>.n);(vr=. (n,n)$0);(,1>.n);(lwork$0);(,lwork=. 1>.4*n);,_1
 )

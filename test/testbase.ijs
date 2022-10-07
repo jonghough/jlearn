@@ -2,7 +2,8 @@
 
 coclass 'TestBase'
 
-
+testCount=:0
+pass=:0
 NB. Assert left-hand verb evaluates the right-hand
 NB. noun's first argument to match the right-hand
 NB. noun's second argument.
@@ -63,6 +64,7 @@ NB. in case it fails.
 NB. Example:
 NB. >  myTest testWrapper 'Matrix inverse test'
 testWrapper=: 1 : 0
+testCount=:,testCount+1
 res=. u ''
 smoutput res
 if. -. res do.
@@ -70,6 +72,7 @@ if. -. res do.
 else.
   smoutput 'Test success ', ":y
 end.
+pass=:pass+,res
 res
 )
 
