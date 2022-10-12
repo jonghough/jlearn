@@ -78,4 +78,4 @@ rbm=: (64;100;0.01;25;5000;10) conew 'RBMClassifier'
 Y fitClassify__rbm X 
  +/  W-:"1 1 (=>./)"1  predict__rbm Z
 NB. gets around 90% accuracy
-```
+```jonghough can only view
