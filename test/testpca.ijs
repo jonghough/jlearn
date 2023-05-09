@@ -3,6 +3,7 @@ Copyright (C) 2022 Jonathan Hough. All rights reserved.
 )
 
 require jpath '~Projects/jlearn/dr/pca.ijs'
+require jpath '~Projects/jlearn/utils/utils.ijs'
 require jpath '~Projects/jlearn/datasets/iris.csv'
 
 coclass 'TestPCA'

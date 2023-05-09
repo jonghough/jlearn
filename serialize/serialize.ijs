@@ -33,18 +33,18 @@ NB. Parameters:
 NB. y: initial object to serialize.
 NB. returns:
 NB.   string representing serialized object(s).
-serialize=: 3 : 0
-if. isPrimitive y do.
-,hfd a.i. (3!:1)"_ y return.
+serialize=: 3 : 0 
+if. isPrimitive y do. 
+  ,hfd a.i. (3!:1)"_ y return.
 end.
 if. 1=# copath y do.
   throw. 'Error serializing non-object'
 end.
 Q=: ''
 R=: ''
-Qr=: <'root_obj';y
-while. 0<#Qr do.
-  s=. (>@:{. sObj {:) >{. Qr
+Qr=: <'root_obj';y 
+while. 0<#Qr do. 
+  s=. (>@:{. sObj {:) >{. Qr 
   s=. s,'end',LF
   Qr=: }.Qr
   Q=: s,Q
@@ -54,13 +54,13 @@ Q
 
 
 NB. Serialize a single J object.
-sObj=: 4 : 0
+sObj=: 4 : 0  
 TYPE=. ":,>{.copath y
 s=. 'object: ',x,' ',TYPE,LF
 l=: }.nl__y ''
 for_i. i.#l do.
-  name=. >i{l
-  isnamet=. (":".name,'__y') -: TYPE
+  name=. >i{l 
+  isnamet=. (":".name,'__y') -: TYPE 
   if.isnamet +. isPrimitive ".(5!:5<(name,'__y')) do.
     s=. s,name,'=:', (": ". ',hfd a.i. (3!:1)"_ ',name,'__y'),LF
   else.
@@ -69,8 +69,8 @@ for_i. i.#l do.
       len=. # ".(,name),'__y'
       for_j. i.len do.
         obj=. j{ ".(,name),'__y'
-        type=. ": ,>{.copath obj 
-        hashnm=: ": >obj  
+        type=. ": ,>{.copath obj
+        hashnm=: ": >obj
         s=. s,name,'=:o',(":j),' ',(hashnm),' ',type,LF
         if. -. R e.~ obj do.
           Qr=: Qr,<(hashnm); (,obj)
@@ -85,12 +85,14 @@ end.
 s
 )
 
-isPrimitive=: 3 : 0
-if.  0 NB.(<'boxed') ~: < datatype y
+isPrimitive=: 3 : 0 
+primitiveTypes=.  'integer';'boolean';'floating';'rational';'complex';'literal'
+if. primitiveTypes e.~ < datatype y
 do.
-1
-else.
-a: -: {. (copath ::(a:"_) y)-.<,'z'
+  1
+NB. if symbol type, it could be an object
+else. 
+  a: -: {. (copath ::(a:"_) y)-.<,'z'
 end.
 )
 
@@ -112,7 +114,7 @@ NAMES=: ''
 p=. 0
 c=. 0
 while. 1 do.
-  whilst. (<'end')~:(p+c){y do. 
+  whilst. (<'end')~:(p+c){y do.
     c=. c+1
   end.
   objList=: objList,dObj (p+i.c){y
@@ -150,7 +152,7 @@ end.
 {:objList
 )
 
-NB. Deserialize a single object. 
+NB. Deserialize a single object.
 dObj=: 3 : 0
 'ignore name type'=. ;:>{.y
 c=. #y
@@ -161,9 +163,9 @@ for_i. >:i.c-1 do.
   field=. ,>i{y
   o=. '=:o' strsplit field
   m=. '=:n' strsplit field
-  if. (1=#m)*.1=#o do. 
-    'fname fval'=. '=:' strsplit field  
-    len =: (-:#fval),2
+  if. (1=#m)*.1=#o do.
+    'fname fval'=. '=:' strsplit field
+    len=: (-:#fval),2
     unpacked=. 3!:2"_[ a.{~ dfh (len&$), fval
     ". (":fname),'__n=: unpacked'
   elseif. 1=#o do.

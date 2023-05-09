@@ -6,11 +6,12 @@ require jpath '~Projects/jlearn/test/testknn.ijs'
 require jpath '~Projects/jlearn/test/testnnopt.ijs'
 require jpath '~Projects/jlearn/test/testlapack.ijs'
 require jpath '~Projects/jlearn/test/testpca.ijs'
+require jpath '~Projects/jlearn/test/testserialize.ijs'
 require jpath '~Projects/jlearn/test/testpoollayer.ijs'
 cocurrent 'TestRunner'
 
 runAll=: 3 : 0
-tests=. 'TestOptimize';'TestGMM';'TestKNN';'TestNNOpt';'TestLapack';'TestPCA';'TestPoolLayer'
+tests=. 'TestOptimize';'TestGMM';'TestKNN';'TestNNOpt';'TestLapack';'TestPCA'; 'TestSerialize';'TestPoolLayer'
 c=. # tests
 p=. 0
 for_i. i. c do. 

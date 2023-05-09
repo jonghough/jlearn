@@ -1,6 +1,7 @@
 NB. Test Pool Layer.
 
 
+require jpath '~Projects/jlearn/adv/poollayer.ijs'
 coclass 'TestPoolLayer'
 coinsert 'TestBase'
 

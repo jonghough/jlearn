@@ -1,5 +1,5 @@
 
-
+require jpath '~Projects/jlearn/mixtures/gmm.ijs'
 coclass 'TestGMM'
 coinsert 'TestBase'
 
