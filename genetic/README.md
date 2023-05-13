@@ -193,6 +193,7 @@ best=: {. 10000 fit__solver chromosomes__sym ''
    ] (([: | ]) (3&o.@:] ([: ^. ]) ([: +/ ]) 5&{"1@:] 5&o.@:] 1&o.@:] ^))
 
 ```
+softmax"1 (|:W__sym) dot"_ 1  func__sym X
 Even though there is no ordering in the dataset, it is possible to view a line graph
 comparison to see how close *GUESS* is at estimating the target values.
 
@@ -217,3 +218,19 @@ GUESS is actually equivalent to `|@:^.@:(1&o.)@:^`.
 *GUESS=|log(sin(exp(x5)))|*.
 
 It may be surprising how this gives an accurate result
+
+
+
+
+## Classifier (Experimental)
+
+```j
+
+
+   data =:16 readCSV_jLearnUtil_ '/home/jon/j64-806-user/projects/jlearn/datasets/pendigits.tra'
+ 'X Y Z T' =: splitDataset_jLearnUtil_ data,0.9;1
+ sym =: (X;Y;60;10;'beta'; 2 2) conew 'SymRegClassifier'
+      solver=: (sym;0.2;20;10;0.001;0;1) conew 'GASolver'
+      best=: {. 1000 fit__solver chromosomes__sym ''
+ T-:"1 1(=>./)"1  best c2f__sym"1 Z
+``

@@ -1,4 +1,3 @@
-
 Note 'References'
 [1] Pattern Recognition and Machine Learning, Cristopher M. Bishop (Chapter 2)
 
@@ -6,9 +5,7 @@ Note 'References'
 )
 
 
-NB. https://scipy.github.io/devdocs/reference/generated/scipy.stats.gaussian_kde.html
-
-NB. https://github.com/tommyod/KDEpy/blob/0e66af3f8755a2e0b2087244ab1b964657401d48/KDEpy/kernel_funcs.py#L340
+NB. ref: https://scipy.github.io/devdocs/reference/generated/scipy.stats.gaussian_kde.html 
 coclass 'KDE'
 
 calch=: 3 : 0
@@ -38,11 +35,7 @@ create=: 3 : 0
 
 gridify=: (~.@:] ,: (% +/)@:(#/.~))@:([ * <.@%~)
 
-makeGrid=: 3 : 0
-gridz=:gsz <@([ gridify (/:~@:]))"0 1 |: data
-NB. grid point values
-gvs=: (({.&.>@:{.) (<@,"0 0"0 _&:>) {.&.>@{:)  gridz
-)
+ 
 fit=: 3 : 0
 makeGrid ''
 NB. joined probabilities
@@ -51,7 +44,7 @@ gridvals=: (({.&.>@:{.) (<@,"0 0"0 _&:>) {.&.>@{:)  gridz
 )
 
 NB. the real makeGrid
-makeGrid2=: 3 : 0
+makeGrid=: 3 : 0
 sd=: /:~ data
 
 gridz=:gsz <@([ gridify (/:~@:]))"0 1 |: data
