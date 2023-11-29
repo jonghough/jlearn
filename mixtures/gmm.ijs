@@ -154,7 +154,7 @@ NB. first the summand of -0.5 * (dims*log(2pi) + log(det(covars)))
 b0=: (dimensions * LOG2PI) + ( ^. | det covars)
 NB. then, the exponent summand
 iCovars=: ''
-try.
+try. 
   L=: cholesky covars
   iCovars=: dotty L
 catch.

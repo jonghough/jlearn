@@ -1,5 +1,5 @@
 
-
+require jpath '~Projects/jlearn/mixtures/gmm.ijs'
 coclass 'TestGMM'
 coinsert 'TestBase'
 
@@ -10,28 +10,28 @@ a=: coname ''
 
 
 testDiagSimple=: 3 : 0
-R=:  0.5 + -: ? 100 4 $ 0 NB. random in ranfe [0.5,1]
+R=:  0.5 + -: ? 100 4 $ 0 NB. random in range [0.5,1]
 D=: R * 100 4 $ , (=@i.) 4
 gmm=: (D; 1; 'diag'; 1e_3; 1; 1e_4) conew 'GMM'
 fit__gmm assertNoThrow 200
 )
 
 testFullSimple=: 3 : 0
-R=:  0.5 + -: ? 100 4 $ 0 NB. random in ranfe [0.5,1]
+R=:  0.5 + -: ? 100 4 $ 0 NB. random in range [0.5,1]
 D=: R * 100 4 $ , (=@i.) 4
 gmm=: (D; 1; 'full'; 1e_3; 1; 1e_4) conew 'GMM'
 fit__gmm assertNoThrow 200
 )
 
 testTiedSimple=: 3 : 0
-R=:  0.5 + -: ? 100 4 $ 0 NB. random in ranfe [0.5,1]
+R=:  0.5 + -: ? 100 4 $ 0 NB. random in range [0.5,1]
 D=: R * 100 4 $ , (=@i.) 4
 gmm=: (D; 1; 'tied'; 1e_3; 1; 1e_4) conew 'GMM'
 fit__gmm assertNoThrow 200
 )
 
 testSphericalSimple=: 3 : 0
-R=:  0.5 + -: ? 100 4 $ 0 NB. random in ranfe [0.5,1]
+R=:  0.5 + -: ? 100 4 $ 0 NB. random in range [0.5,1]
 D=: R * 100 4 $ , (=@i.) 4
 gmm=: (D; 1; 'spherical'; 1e_3; 1; 1e_4) conew 'GMM'
 fit__gmm assertNoThrow 200

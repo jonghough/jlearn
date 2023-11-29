@@ -1,4 +1,5 @@
 
+require jpath '~Projects/jlearn/knn/knn.ijs'
 coclass 'TestKNN'
 coinsert 'TestBase'
 create=: 3 : 0

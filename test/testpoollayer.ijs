@@ -1,6 +1,7 @@
 NB. Test Pool Layer.
 
 
+require jpath '~Projects/jlearn/adv/poollayer.ijs'
 coclass 'TestPoolLayer'
 coinsert 'TestBase'
 
@@ -39,7 +40,7 @@ destroy__p1 ''
 )
 
 
-run=: 3 : 0
+run=: 3 : 0 
 test1 testWrapper 'PoolLayer Test 1' 
 test2 testWrapper 'PoolLayer Test 2' 
 test3 testWrapper 'PoolLayer Test 3' 
