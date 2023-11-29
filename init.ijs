@@ -34,9 +34,9 @@ NB. serialize
 require jpath '~Projects/jlearn/serialize/serialize.ijs'
 
 NB. test
-require jpath '~Projects/jlearn/test/testlapack.ijs'
-require jpath '~Projects/jlearn/test/testpca.ijs'
 require jpath '~Projects/jlearn/test/testbase.ijs'
+require jpath '~Projects/jlearn/test/testlapack.ijs'
+require jpath '~Projects/jlearn/test/testpca.ijs' 
 require jpath '~Projects/jlearn/test/testgmm.ijs'
 require jpath '~Projects/jlearn/test/testknn.ijs'
 require jpath '~Projects/jlearn/test/testnnopt.ijs'
